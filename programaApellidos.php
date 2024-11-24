@@ -3,6 +3,7 @@ include_once("wordix.php");
 
 echo"hola \n";
 echo"adios \n";
+echo"como estas \n";
 
 echo"todo bien\n";
 /**************************************/
