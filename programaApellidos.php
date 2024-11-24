@@ -1,10 +1,9 @@
 <?php
 include_once("wordix.php");
 
-echo"hola \n";  
+echo"hola \n";
 
-echo"todo bien"
-
+echo"todo bien\n";
 /**************************************/
 /***** DATOS DE LOS INTEGRANTES *******/
 /**************************************/
