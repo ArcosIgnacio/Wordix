@@ -1,6 +1,7 @@
 <?php
 include_once("wordix.php");
 
+echo"hola \n";
 echo"hola \n";  
 
 /**************************************/
