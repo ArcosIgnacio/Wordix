@@ -2,7 +2,7 @@
 include_once("wordix.php");
 
 echo"hola \n";
-echo"hola \n";  
+echo"hola \n";
 
 /**************************************/
 /***** DATOS DE LOS INTEGRANTES *******/
