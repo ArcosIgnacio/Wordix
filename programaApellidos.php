@@ -4,6 +4,7 @@ include_once("wordix.php");
 echo"hola \n";
 echo"adios \n";
 echo"como estas \n";
+echo"profesor \n";
 
 echo"todo bien\n";
 /**************************************/
