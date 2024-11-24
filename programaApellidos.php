@@ -3,6 +3,8 @@ include_once("wordix.php");
 
 echo"hola \n";  
 
+echo"todo bien"
+
 /**************************************/
 /***** DATOS DE LOS INTEGRANTES *******/
 /**************************************/
