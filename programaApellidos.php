@@ -2,8 +2,12 @@
 include_once("wordix.php");
 
 echo"hola \n";
+<<<<<<< HEAD
 echo"hola \n";
+=======
+>>>>>>> 42d7095df60e6b2a821e9d8e805cacb0105f7b87
 
+echo"todo bien\n";
 /**************************************/
 /***** DATOS DE LOS INTEGRANTES *******/
 /**************************************/
