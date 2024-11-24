@@ -133,7 +133,9 @@ function escribirMensajeBienvenida($usuario)
 
 
 /**
- * ****COMPLETAR*****
+ * funcion que determina la cadena de texto solo tenga letras
+ * @param string $cadena
+ * @return $esLetra
  */
 function esPalabra($cadena)
 {
@@ -149,7 +151,8 @@ function esPalabra($cadena)
 }
 
 /**
- *  ****COMPLETAR*****
+ * funcion que determina si una palabra ingresada es de 5 letras
+ * @return string $palabra
  */
 function leerPalabra5Letras()
 {
@@ -327,6 +330,12 @@ function esIntentoGanado($estructuraPalabraIntento)
     return $ganado;
 }
 
+
+
+
+
+
+
 /**
  * ****COMPLETAR***** documentación de la intefaz
  */
@@ -336,6 +345,11 @@ function obtenerPuntajeWordix()  /* ****COMPLETAR***** parámetros formales nece
     /* ****COMPLETAR***** cuerpo de la función*/
     return 0;
 }
+
+
+
+
+
 
 /**
  * Dada una palabra para adivinar, juega una partida de wordix intentando que el usuario adivine la palabra.
