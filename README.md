@@ -11,7 +11,7 @@ Universidad Nacional del Comahue
 # Integrantes del Grupo
 
 - **Ignacio Arcos** - Legajo FAI-5472 - mail: ignacio.arcos@est.fi.uncoma.edu.ar - Github: ArcosIgnacio
-- **Mateo Parada** - Legajo FAI-5359 - mail: - Github: mateoparada
+- **Mateo Parada** - Legajo FAI-5359 - mail: mateo.parada@gmail.com - Github: mateoparada
 
 # Profesores
 
