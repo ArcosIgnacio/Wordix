@@ -15,5 +15,7 @@ Universidad Nacional del Comahue
 
 # Profesores
 
-- ** **
-- ** **
+- **Dr. Luis Reynoso** - Profesor a Cargo
+- **Lic. Cristian Torres** - Ayudante de Catedra
+- **Maria Monserrat** - Ayudante de Catedra
+- **Facundo Muñoz** - Ayudante de Catedra
