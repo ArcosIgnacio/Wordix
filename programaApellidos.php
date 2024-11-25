@@ -14,40 +14,7 @@ include_once("wordix.php");
 /***** DEFINICION DE FUNCIONES ********/
 /**************************************/
 
-function seleccionarOpcion() {
-    // variable interna entero $opcion
-    do {
-        echo "Menú de opciones: \n";
-        echo "1) Jugar al wordix con una palabra elegida \n";
-        echo "2) Jugar al wordix con una palabra aleatoria \n";
-        echo "3) Mostrar una partida \n";
-        echo "4) Mostrar la primer partida ganadora \n";
-        echo "5) Mostrar resumen de Jugador \n";
-        echo "6) Mostrar listado de partidas ordenadas por jugador y por palabra \n";
-        echo "7) Agregar una palabra de 5 letras a Wordix \n";
-        echo "8) Salir \n";
-        echo"\n";
 
-        echo"Seleccione una opcion: ";
-        echo"\n";
-
-        // Lee la opción del usuario
-        $opcion = trim(fgets(STDIN));
-
-        if (is_numeric($opcion)) { //determina si un string es un número. puede ser float como entero.
-            $opcion  = $opcion * 1; //con esta operación convierto el string en número.
-        }
-
-        // Valida que la opción sea un número entre 1 y 8
-        if (!(is_numeric($opcion) && $opcion == (int)($opcion)) || $opcion < 1 || $opcion > 8) {
-            echo "La opción es inválida. Por favor, ingrese un número entre 1 y 8.\n";
-            echo"\n";
-        } 
-
-    } while (!(is_numeric($opcion) && $opcion == (int)($opcion)) || $opcion < 1 || $opcion > 8);
-
-    return $opcion;
-}
 
 
 /**
@@ -93,9 +60,6 @@ function mostrarPartida($numero){
     }
 }
 
-/**
- * funcion que muestra el menu
- */
 
 
 /**
@@ -112,7 +76,7 @@ function cargarPartidas(){
     $coleccionPardas[6] = ["palabraWordix" => "CAMPO" , "jugador" => "capo", "intentos"=> 3, "puntaje" => 14];
     $coleccionPardas[7] = ["palabraWordix" => "NUBES" , "jugador" => "hacker", "intentos"=> 4, "puntaje" => 0];
     $coleccionPardas[8] = ["palabraWordix" => "MATES" , "jugador" => "juan", "intentos"=> 5, "puntaje" => 2];
-    $coleccionPardas[9] = ["palabraWordix" => "MESSI" , "jugador" => "majo", "intentos"=> 6, "puntaje" => 0];
+    $coleccionPardas[9] = ["palabraWordix" => "MESSI" , "jugador" => "majo", "intentos"=> 6, "puntaje" => 4];
     return ($coleccionPardas);
 }
 
@@ -171,30 +135,30 @@ function seleccionarOpcion() {
 
 /**
  *  punto 7
- *  Agrega una palabra nueva de 5 letras a la colección de palabras.
- * 
- *  @param array $coleccionPalabrasNueva
- *  @param string $palabraNueva 
- *  @return array 
+ *  La funcion tiene como parametros de entrada una coleccion de palabras y el nombre de un jugador.
+ *  La funcion retorna la primer partida ganada por el jugar. Si el jugado aun no ha ganado una partida,
+ *  la funcion retorna el valor -1
+ *  
+ *  @param array $partidas
+ *  @param string $jugador
+ *  @return int
  */
-function agregarPalabra($coleccionPalabrasNueva, $palabraNueva) {
-    // variables internas: $palabraAgregada
-    $palabraAgregada = false;
+function primerPartidaGanada($partidas, $jugador) {
+    // variables internaas: int $i
+    //                      int $primeraGanada
 
-    while (!$palabraAgregada) {
-        if (!in_array($palabraNueva, $coleccionPalabrasNueva)) {
-            $coleccionPalabrasNueva[] = $palabraNueva;
-            echo "La palabra ya se agregó.\n";
-            $palabraAgregada = true;
-        } else {
-            echo "La palabra ya está en la colección. Intentalo de nuevo.\n";
-            $palabraNueva = leerPalabra5Letras(); 
+    $primeraGanada = -1;
+    $ganadaMenor = 999;
+
+    
+        for($i = 0; $i < count($partidas); $i++) {
+            if ($partidas[$i]["jugador"] == $jugador && $partidas[$i]["puntaje"] > 0 && $i < $ganadaMenor) {
+                    $ganadaMenor = $i;
+                    $primeraGanada = $i;
+            }
         }
-    }
-
-    return $coleccionPalabrasNueva;
+        return $primeraGanada;
 }
-
 
 
 /* ****COMPLETAR***** */
@@ -207,13 +171,16 @@ function agregarPalabra($coleccionPalabrasNueva, $palabraNueva) {
 
 //Declaración de variables:
 
+// boolean $jugadorValido
+// boolean $jugadoExiste
+$partidaGanadora;
 // array $coleccionPartidas
 // int $opcion
 // boolean $salir
 // int $numero
 // string $palabra
 // array $coleccionPalb
-$coleccionPartidas=[]; $opcion; $salir=true; $numero; $palabra; $coleccionPalb=[];
+$coleccionPartidas=[]; $opcion; $salir=true; $numero; $palabra; $coleccionPalb=[]; $jugadorExiste;
 
 //Inicialización de variables:
 $coleccionPartidas=cargarPartidas();
@@ -226,40 +193,7 @@ $coleccionPalb=cargarColeccionPalabras();
 //print_r($partida);
 //imprimirResultado($partida);
 
-do{
-    
-    $opcion=seleccionarOpcion();
 
-    switch ($opcion){
-        case 1:
-            break;
-        case 2:
-            break;
-        case 3:
-            echo"Ingrese que partida quiere ver(0 a 9): ";
-            $numero=trim(fgets(STDIN));
-            echo"\n";
-            mostrarPartida($numero);
-            echo"\n";
-            break;
-        case 4:
-            break;
-        case 5:
-            break;
-        case 6:
-            break;
-        case 7:
-            $palabra=leerPalabra5Letras();
-            $coleccionPalb=agregarPalabra($coleccionPalb,$palabra);
-            echo"\n";
-            break;
-        case 8:
-            echo"Gracias por jugar wordix!! \n";
-            $salir=false;
-            break;
-    }
-
-}while($salir!=false);
 
 
 /*
