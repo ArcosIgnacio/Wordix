@@ -128,14 +128,15 @@ function escribirSegunEstado($texto, $estado)
 }
 
 /**
- * ****COMPLETAR*****
+ * funcion que da la bienvenida al ususario
+ * @param string $ususario
  */
 function escribirMensajeBienvenida($usuario)
 {
     echo "***************************************************\n";
     echo "** Hola ";
     escribirAmarillo($usuario);
-    echo " Juguemos una PARTIDA de WORDIX! **\n";
+    echo " Juguemos una PARTIDA de WORDIX! \n";
     echo "***************************************************\n";
 }
 
@@ -345,13 +346,27 @@ function esIntentoGanado($estructuraPalabraIntento)
 
 
 /**
- * ****COMPLETAR***** documentación de la intefaz
+ * funcion que suma todos los puntos de las partidas jugadas por un usuario
+ * @param string $palabraWordix
+ * @param int $numeroIntentos
+ * @return $puntaje
  */
-function obtenerPuntajeWordix()  /* ****COMPLETAR***** parámetros formales necesarios */
-{
-
-    /* ****COMPLETAR***** cuerpo de la función*/
-    return 0;
+function obtenerPuntajeWordix($palabraWordix,$numeroIntentos){
+    $puntaje=0; $puntosIntentos=0;
+    $letra=strlen($palabraWordix);
+    for ($i = 0; $i < strlen($letra); $i++) {
+        $letra = strtoupper($letra[$i]); // Convertir a mayúsculas
+        if ($letra >= 'A' && $letra <= 'M') {
+            $letra += 2; // Letras de la A a la M valen 2 puntos
+        } elseif ($letra >= 'N' && $letra <= 'Z') {
+            $puntaje += 3; // Letras de la N a la Z valen 3 puntos
+        }
+    }
+    if($numeroIntentos>=1 && $numeroIntentos<=6){
+        $puntosIntentos=7-$numeroIntentos;
+    }
+    $puntaje+=$puntosIntentos;
+    return $puntaje;
 }
 
 
@@ -391,7 +406,7 @@ function jugarWordix($palabraWordix, $nombreUsuario)
 
     if ($ganoElIntento) {
         $nroIntento--;
-        $puntaje = obtenerPuntajeWordix();
+        $puntaje = obtenerPuntajeWordix($palabraWordix,$ganoElIntento);
         echo "Adivinó la palabra Wordix en el intento " . $nroIntento . "!: " . $palabraIntento . " Obtuvo $puntaje puntos!";
     } else {
         $nroIntento = 0; //reset intento

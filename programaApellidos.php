@@ -15,7 +15,6 @@ include_once("wordix.php");
 /**************************************/
 
 
-
 function primerPartidaGanadora($array,$nombre){
     $indice=-1; $menor=1000;
     for($i=0;$i<count($array);$i++){
