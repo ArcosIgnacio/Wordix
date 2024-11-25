@@ -14,6 +14,20 @@ include_once("wordix.php");
 /***** DEFINICION DE FUNCIONES ********/
 /**************************************/
 
+
+function primerPartidaGanadora($array,$nombre){
+    $indice=-1; $menor=1000;
+    for($i=0;$i<count($array);$i++){
+        if($array[$i]["jugador"]==$nombre && $array[$i]["puntaje"]>0 && $i<$menor){
+            $menor=$i;
+            $indice=$i;
+        }
+    }
+    return $indice;
+}
+
+
+
 function seleccionarOpcion() {
     // variable interna entero $opcion
     do {
@@ -83,7 +97,7 @@ function mostrarPartida($numero){
     $array=cargarPartidas();
     for($i=0;$i<count($array);$i++){
         if($i==$numero){
-                echo "Partida Nº".($i)."\n";
+                echo "Partida Wordix".($i+1)."\n";
                 echo "Palabra: ".$array[$i]["palabraWordix"]."\n";
                 echo "Jugador: ".$array[$i]["jugador"]."\n";
                 echo "Intentos restantes: ".$array[$i]["intentos"]."\n";
@@ -104,15 +118,15 @@ function mostrarPartida($numero){
  */
 function cargarPartidas(){
     $coleccionPardas[0] = ["palabraWordix" => "QUESO" , "jugador" => "majo", "intentos"=> 0, "puntaje" => 0];
-    $coleccionPardas[1] = ["palabraWordix" => "CASAS" , "jugador" => "rudolf", "intentos"=> 3, "puntaje" => 14];
-    $coleccionPardas[2] = ["palabraWordix" => "QUESO" , "jugador" => "pink2000", "intentos"=> 6, "puntaje" => 10];
-    $coleccionPardas[3] = ["palabraWordix" => "PERRO" , "jugador" => "juan", "intentos"=> 2, "puntaje" => 8];
-    $coleccionPardas[4] = ["palabraWordix" => "LETRA" , "jugador" => "maria", "intentos"=> 4, "puntaje" => 4];
-    $coleccionPardas[5] = ["palabraWordix" => "PLATA" , "jugador" => "pink2000", "intentos"=> 1, "puntaje" => 8];
-    $coleccionPardas[6] = ["palabraWordix" => "CAMPO" , "jugador" => "capo", "intentos"=> 3, "puntaje" => 14];
-    $coleccionPardas[7] = ["palabraWordix" => "NUBES" , "jugador" => "hacker", "intentos"=> 4, "puntaje" => 0];
-    $coleccionPardas[8] = ["palabraWordix" => "MATES" , "jugador" => "juan", "intentos"=> 5, "puntaje" => 2];
-    $coleccionPardas[9] = ["palabraWordix" => "MESSI" , "jugador" => "majo", "intentos"=> 6, "puntaje" => 0];
+    $coleccionPardas[1] = ["palabraWordix" => "CASAS" , "jugador" => "rudolf", "intentos"=> 3, "puntaje" => 16];
+    $coleccionPardas[2] = ["palabraWordix" => "QUESO" , "jugador" => "pink2000", "intentos"=> 5, "puntaje" => 20];
+    $coleccionPardas[3] = ["palabraWordix" => "PERRO" , "jugador" => "juan", "intentos"=> 2, "puntaje" => 17];
+    $coleccionPardas[4] = ["palabraWordix" => "LETRA" , "jugador" => "maria", "intentos"=> 4, "puntaje" => 17];
+    $coleccionPardas[5] = ["palabraWordix" => "PLATA" , "jugador" => "pink2000", "intentos"=> 1, "puntaje" => 14];
+    $coleccionPardas[6] = ["palabraWordix" => "CAMPO" , "jugador" => "majo", "intentos"=> 3, "puntaje" => 15];
+    $coleccionPardas[7] = ["palabraWordix" => "NUBES" , "jugador" => "hacker", "intentos"=> 4, "puntaje" => 18];
+    $coleccionPardas[8] = ["palabraWordix" => "MATES" , "jugador" => "juan", "intentos"=> 5, "puntaje" => 18];
+    $coleccionPardas[9] = ["palabraWordix" => "MESSI" , "jugador" => "majo", "intentos"=> 0, "puntaje" => 13];
     return ($coleccionPardas);
 }
 
@@ -148,7 +162,11 @@ function cargarColeccionPalabras()
 // int $numero
 // string $palabra
 // array $coleccionPalb
-$coleccionPartidas=[]; $opcion; $salir=true; $numero; $palabra; $coleccionPalb=[];
+// string $nombreJugador
+// int $partidaGanadora
+// boolean $jugadorExiste
+// boolean $jugadorValido
+$coleccionPartidas=[]; $opcion; $salir=true; $numero; $palabra; $coleccionPalb=[]; $nombreJugador; $partidaGanadora; $jugadorExiste; $jugadorValido;
 
 //Inicialización de variables:
 $coleccionPartidas=cargarPartidas();
@@ -171,13 +189,50 @@ do{
         case 2:
             break;
         case 3:
-            echo"Ingrese que partida quiere ver(0 a 9): ";
+            echo"Ingrese que partida quiere ver(1 a 10): ";
             $numero=trim(fgets(STDIN));
             echo"\n";
             mostrarPartida($numero);
             echo"\n";
             break;
         case 4:
+            echo"hola\n";
+            $jugadorExiste = false;
+            $jugadorValido=false;
+            while (!$jugadorValido) {
+
+                echo "Ingrese el nombre del jugador: ";
+                $nombreJugador = trim(fgets(STDIN));
+                $nombreJugador = strtolower($nombreJugador);
+
+                if (esPalabra($nombreJugador)) {
+                    $jugadorExiste = false;
+                    foreach($coleccionPartidas as $partida) {
+                        if (strtolower($partida["jugador"]) == $nombreJugador) {
+                            $jugadorExiste = true;
+                        }
+                    }
+                }
+                
+                if ($jugadorExiste == true) {
+                    $jugadorValido = true;
+                } else {
+                    echo "el jugador no existe.\n";//     php programaApellidos.php
+                }
+            }
+            echo"\n";
+            $partidaGanadora=primerPartidaGanadora($coleccionPartidas,$nombreJugador);
+            if($partidaGanadora!=-1){
+                echo"Partida Wordix ".($partidaGanadora+1).": Palabra ".$coleccionPartidas[$partidaGanadora]["palabraWordix"]." \n";
+                echo"Jugador: ".$coleccionPartidas[$partidaGanadora]["jugador"]." \n";
+                echo"Puntaje: ".$coleccionPartidas[$partidaGanadora]["puntaje"]." puntos \n";
+                echo"Intento: Adivino la palabra en ".$coleccionPartidas[$partidaGanadora]["intentos"]." intentos \n";
+                echo" \n";
+
+            }elseif($partidaGanadora==-1){
+                echo"El jugador no adivino la palabra \n";
+                echo" \n";
+            }
             break;
         case 5:
             break;
