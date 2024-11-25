@@ -14,7 +14,65 @@ include_once("wordix.php");
 /***** DEFINICION DE FUNCIONES ********/
 /**************************************/
 
+/**
+ * Funcion que muestra un resumen de las estadisticas de un usuario sobre sus partidas
+ * @param array $array
+ * @param string $nombre
+ */
+function resumenJugador($array,$nombre){
+    $intento=[1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0]; $cantPartidas=0; $cantPuntaje=0; $cantVictorias=0; $porcentaje=0;
+    for($i=0;$i<count($array);$i++){
+        if($array[$i]["jugador"]==$nombre){
+            $cantPartidas+=1;
+            if($array[$i]["puntaje"]>0){
+                $cantPuntaje+=$array[$i]["puntaje"];
+                $cantVictorias+=1;
+            }
+        }
+    }
+    for ($i = 0; $i < count($array); $i++) {
+        $partida = $array[$i];
+        if ($partida ["jugador"] == $nombre && $partida ["puntaje"] > 0) {
+            $intentoGanado = 6 - $partida ["intentos"];
+            if ($intentoGanado >= 1 && $intentoGanado <= 6) {
+                $intento[$intentoGanado]+=1;
+            }
+        }
+    }
+    if($cantPartidas==0){
+        $porcentaje=0;
+        echo"Jugador: ".$nombre."\n";
+        echo"Partidas: ".$cantPartidas."\n";
+        echo"Puntaje Total: ".$cantPuntaje."\n";
+        echo"Victorias: ".$cantVictorias."\n";
+        echo"Porcentaje de Victorias: ".$porcentaje."%\n";
 
+        for($i=1;$i<=6;$i++){
+            echo"       Intento ".$i.": 0\n";
+        }
+        echo"\n";
+    }else{
+        $porcentaje=($cantVictorias*100)/$cantPartidas;
+        echo"Jugador: ".$nombre."\n";
+        echo"Partidas: ".$cantPartidas."\n";
+        echo"Puntaje Total: ".$cantPuntaje."\n";
+        echo"Victorias: ".$cantVictorias."\n";
+        echo"Porcentaje de Victorias: ".$porcentaje."%\n";
+        echo"Adivinadas: \n";
+
+        for($i=1;$i<=6;$i++){
+            echo"       Intento ".$i.": ".$intento[$i]."\n";
+        }
+        echo"\n";
+    }
+}
+
+/**
+ * funcion que revisa el menor indice en que gano o si perdio
+ * @param array $array
+ * @param string $nombre
+ * @return int $indice
+ */
 function primerPartidaGanadora($array,$nombre){
     $indice=-1; $menor=1000;
     for($i=0;$i<count($array);$i++){
@@ -27,7 +85,10 @@ function primerPartidaGanadora($array,$nombre){
 }
 
 
-
+/**
+ * funcion que permite al usuario ingresar a las distintas opciones del menu
+ * @return int $opcion
+ */
 function seleccionarOpcion() {
     // variable interna entero $opcion
     do {
@@ -121,10 +182,10 @@ function cargarPartidas(){
     $coleccionPardas[1] = ["palabraWordix" => "CASAS" , "jugador" => "rudolf", "intentos"=> 3, "puntaje" => 16];
     $coleccionPardas[2] = ["palabraWordix" => "QUESO" , "jugador" => "pink2000", "intentos"=> 5, "puntaje" => 20];
     $coleccionPardas[3] = ["palabraWordix" => "PERRO" , "jugador" => "juan", "intentos"=> 2, "puntaje" => 17];
-    $coleccionPardas[4] = ["palabraWordix" => "LETRA" , "jugador" => "maria", "intentos"=> 4, "puntaje" => 17];
+    $coleccionPardas[4] = ["palabraWordix" => "LETRA" , "jugador" => "majo", "intentos"=> 4, "puntaje" => 17];
     $coleccionPardas[5] = ["palabraWordix" => "PLATA" , "jugador" => "pink2000", "intentos"=> 1, "puntaje" => 14];
     $coleccionPardas[6] = ["palabraWordix" => "CAMPO" , "jugador" => "majo", "intentos"=> 3, "puntaje" => 15];
-    $coleccionPardas[7] = ["palabraWordix" => "NUBES" , "jugador" => "hacker", "intentos"=> 4, "puntaje" => 18];
+    $coleccionPardas[7] = ["palabraWordix" => "NUBES" , "jugador" => "majo", "intentos"=> 4, "puntaje" => 18];
     $coleccionPardas[8] = ["palabraWordix" => "MATES" , "jugador" => "juan", "intentos"=> 5, "puntaje" => 18];
     $coleccionPardas[9] = ["palabraWordix" => "MESSI" , "jugador" => "majo", "intentos"=> 0, "puntaje" => 13];
     return ($coleccionPardas);
@@ -196,7 +257,6 @@ do{
             echo"\n";
             break;
         case 4:
-            echo"hola\n";
             $jugadorExiste = false;
             $jugadorValido=false;
             while (!$jugadorValido) {
@@ -235,6 +295,31 @@ do{
             }
             break;
         case 5:
+            $jugadorExiste = false;
+            $jugadorValido=false;
+            while (!$jugadorValido) {
+
+                echo "Ingrese el nombre del jugador: ";
+                $nombreJugador = trim(fgets(STDIN));
+                $nombreJugador = strtolower($nombreJugador);
+
+                if (esPalabra($nombreJugador)) {
+                    $jugadorExiste = false;
+                    foreach($coleccionPartidas as $partida) {
+                        if (strtolower($partida["jugador"]) == $nombreJugador) {
+                            $jugadorExiste = true;
+                        }
+                    }
+                }
+                
+                if ($jugadorExiste == true) {
+                    $jugadorValido = true;
+                } else {
+                    echo "el jugador no existe.\n";//     php programaApellidos.php
+                }
+            }
+            echo"\n";
+            resumenJugador($coleccionPartidas,$nombreJugador);
             break;
         case 6:
             break;
