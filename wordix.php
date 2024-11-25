@@ -27,12 +27,9 @@ const ESTADO_LETRA_PERTENECE = "pertenece";
 /**************************************/
 
 /**
- *  ****COMPLETAR*****
- *  punto 5
  *  Esta funcion tiene como parametros de entradas 2 numeros enteros y le solicita al usuario que un numero
  *  dentro de este rango de valores. En caso de no ser valido, vuelve a pedir que se ingrese correctamente
  *  un numero. En caso de hacerlo bien, la funcion retorna un numero valido.
- * 
  *  @param int $min
  *  @param int $max
  *  @return int $numero
@@ -172,6 +169,7 @@ function leerPalabra5Letras(){
 
 /**
  * Inicia una estructura de datos Teclado. La estructura es de tipo: ¿Indexado, asociativo o Multidimensional?
+ * Es un arreglo asociativo ya que le asigna
  *@return array
  */
 function iniciarTeclado(){

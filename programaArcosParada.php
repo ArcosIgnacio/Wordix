@@ -6,8 +6,8 @@ include_once("wordix.php");
 /***** DATOS DE LOS INTEGRANTES *******/
 /**************************************/
 
-/* Apellido = Arcos , Nombre = Ignacio . Legajo = Fai-5472 . Carrera = TUDW . Mail = mateo.parada@est.fi.uncoma.edu.ar . Usuario Github = mateoparada*/
-/* Apellido = Parada , Nombre = Mateo . Legajo = Fai-5359 . Carrera = TUDW . Mail = ignacio.arcos@est.fi.uncoma.edu.ar . Usuario Github = ArcosIgnacio*/
+/* Apellido = Arcos , Nombre = Ignacio . Legajo = Fai-5472 . Carrera = TUDW . Mail = ignacio.arcos@est.fi.uncoma.edu.ar . Usuario Github = ArcosIgnacio*/
+/* Apellido = Parada , Nombre = Mateo . Legajo = Fai-5359 . Carrera = TUDW . Mail = mateo.parada@est.fi.uncoma.edu.ar . Usuario Github = mateoparada*/
 
 
 /**************************************/
@@ -323,13 +323,13 @@ do{
                             }
                         }
                     }
-                    if($verdadero1==false){
-                        echo"Numero invalido, ingrese otro \n";
+                    if($numero1<0 || $numero1>count($coleccionPalb)){
+                        echo"Numero invalido, ingrese otro numero \n";
                         $numero1=trim(fgets(STDIN));
                         echo"\n";
                     }
                 }else{
-                    echo"Numero invalido, ingrese otro \n";
+                    echo"Ingreso invalido, debes ingresar un numero \n";
                     $numero1=trim(fgets(STDIN));
                     echo"\n";
                  }
