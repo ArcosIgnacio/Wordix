@@ -120,14 +120,15 @@ function escribirSegunEstado($texto, $estado)
 }
 
 /**
- * ****COMPLETAR*****
+ * funcion que da la bienvenida al ususario
+ * @param string $ususario
  */
 function escribirMensajeBienvenida($usuario)
 {
     echo "***************************************************\n";
     echo "** Hola ";
     escribirAmarillo($usuario);
-    echo " Juguemos una PARTIDA de WORDIX! **\n";
+    echo " Juguemos una PARTIDA de WORDIX! \n";
     echo "***************************************************\n";
 }
 
