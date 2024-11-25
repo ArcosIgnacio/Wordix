@@ -16,7 +16,7 @@ include_once("wordix.php");
 
 
 /**
- * funcion que ordena la coleccion de partidas por nombre y palabra en orden descendente
+ * funcion que ordena la coleccion de partidas por nombre y palabra en forma ascendentemente
  * @param array $array
  */
 function ordenarPartidas($array) {
