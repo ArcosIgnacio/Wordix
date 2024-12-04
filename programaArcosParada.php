@@ -275,6 +275,10 @@ function cargarColeccionPalabras(){
 // array $coleccionPalb
 // array $arrayAux1
 // array $arrayAux2
+// array $partida1 Subarray con informacion de la partida, contiene: "palabraWordix": string; int: "puntaje"
+// array $partida2 Subarray con informacion de la partida, contiene: "palabraWordix": string; int: "puntaje"
+// array $partida3 Subarray con informacion de la partida, contiene: "jugador": string
+// array $partida4 Subarray con informacion de la partida, contiene: "jugador": string
 // int $opcion
 // int $numero1
 // int $numero2
@@ -302,16 +306,12 @@ function cargarColeccionPalabras(){
 // booblean $yaAdivinada1
 // booblean $yaAdivinada2
 
-// $partida1
-// $partida2
-// $partida3
-// $partida4
 
-$coleccionPartidas=[]; $coleccionPalb=[]; $arrayAux1=[]; $arrayAux2=[]; 
+
+$coleccionPartidas=[]; $coleccionPalb=[]; $arrayAux1=[]; $arrayAux2=[]; $partida1; $partida2; $partida3; $partida4;
 $opcion; $numero1; $numero2; $partidaGanadora; $indiceAleatorio;
 $palabra1; $palabra2; $palabra3; $nombreJugador1; $nombreJugador2; $nombreJugador3; $nombreJugador4; $palabraSeleccionada; $palabraAleatoria;
 $salir=true; $jugadorExiste1; $jugadorValido1; $jugadorExiste2; $jugadorValido2; $verdadero1; $todasAdivinadas1; $todasAdivinadas2; $adivinada1; $adivinada2; $yaAdivinada1; $yaAdivinada2;
-$partida1; $partida2; $partida3; $partida4;
 
 
 //Inicialización de variables:
