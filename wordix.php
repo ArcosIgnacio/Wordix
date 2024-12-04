@@ -339,15 +339,19 @@ function obtenerPuntajeWordix($palabraWordix, $numeroIntentos) {
     $palabra = strtoupper($palabraWordix);
     for ($i = 0; $i < strlen($palabra); $i++) {
         $letra = $palabra[$i];
-        if ($letra >= 'A' && $letra <= 'M') {
-            $puntaje += 2;
-        } elseif ($letra >= 'N' && $letra <= 'Z') {
-            $puntaje += 3;
+        if ($letra == 'A' || $letra == 'E' || $letra == 'I' || $letra == 'O' || $letra == 'U') {
+            // Si es vocal, suma 1 punto
+            $puntaje += 1;
+        } elseif ($letra >= 'A' && $letra <= 'Z') {
+            // Si es consonante, evaluamos según el rango
+            if ($letra >= 'A' && $letra <= 'M') {
+                $puntaje += 2;
+            } else {
+                $puntaje += 3;
+            }
         }
     }
-    if ($numeroIntentos >= 1 && $numeroIntentos <= 6) {
-        $puntosIntentos = 7 - $numeroIntentos;
-    }
+    $puntosIntentos = 7 - $numeroIntentos;
     $puntaje += $puntosIntentos;
     return $puntaje;
 }
