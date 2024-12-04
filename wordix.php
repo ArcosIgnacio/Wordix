@@ -333,7 +333,7 @@ function obtenerPuntajeWordix($palabraWordix, $numeroIntentos) {
     //Variable interna int $puntaje
     //Variable interna int $puntosIntentos
     //Variable interna string $palabra
-    //Variable interna char $letra
+    //Variable interna string $letra
     $puntaje = 0;
     $puntosIntentos = 0;
     $palabra = strtoupper($palabraWordix);
