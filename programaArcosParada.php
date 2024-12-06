@@ -14,17 +14,6 @@ include_once("wordix.php");
 /***** DEFINICION DE FUNCIONES ********/
 /**************************************/
 
-/**
- * funcion para ingresar un numero valido entero dentro de los indices correspondientes
- * @param string[] $array
- * @return int $numero
- */
-// function numeroValido($array){
-//     echo"Ingrese un numero del 1 y ".count($array).": ";
-//     $numero=solicitarNumeroEntre(1, count($array));
-//     $numero--;
-//     return $numero;
-// }
 
 /**
  * funcion que solicita un numero valido y verifica que este no se haya usado por el jugador anteriormente
@@ -70,18 +59,20 @@ function palabraAleatoria($nombre,$array1,$array2){
     $auntenticar=true;
     $indice=array_rand($array2);
     $cont=0;
+    $aux=1;
     while($auntenticar!=false){
         if ($cont < count($array1)) {
             // Compara si el jugador y la palabra coinciden
             if ($array1[$cont]["jugador"] == $nombre && $array1[$cont]["palabraWordix"] == $array2[$indice] && $array1[$cont]["puntaje"] > 0) {
-                echo "La palabra ya fue jugada por " . $nombre . " \n";
-                echo"\n";
-                $indice=-1;
-                $auntenticar = false; // Si se encuentra, terminamos el ciclo
-            } else {
-                // Si no es la palabra que buscamos, seguimos con la siguiente partida
-                $cont += 1;
-            }
+                $indice=array_rand($array2);
+                $cont=0;
+                $aux+=1;
+                if($aux==count($array1)){
+                    $indice=-1;
+                    $auntenticar = false;
+                }
+            } 
+            $cont += 1;
         } else {
             $auntenticar = false;
         }
@@ -110,7 +101,6 @@ function comparacion($a, $b) {
     }
     return $interno;
 }
-
 
 /**
 * funcion que ordena la coleccion de partidas por nombre y palabra en forma ascendentemente
@@ -229,10 +219,10 @@ function primerPartidaGanadora($array,$nombre){
 
 /**
  * funcion que permite al usuario ingresar a las distintas opciones del menu
- * @return int $opcion
+ * @return int $numero
  */
 function seleccionarOpcion() {
-    // variable interna int $opcion
+    // variable interna int $numero
     echo "\n";
     echo "Menú de opciones: \n";
     echo "1) Jugar al wordix con una palabra elegida \n";
@@ -248,9 +238,9 @@ function seleccionarOpcion() {
     echo"Seleccione una opcion: ";
 
     // Lee la opción del usuario
-    $opcion = solicitarNumeroEntre(1, 8);
+    $numero = solicitarNumeroEntre(1, 8);
 
-    return $opcion;
+    return $numero;
 }
 
 /**
@@ -330,10 +320,7 @@ function cargarPartidas(){
 function cargarColeccionPalabras(){
     //Variable interna string[] $coleccionPalabras 
     $coleccionPalabras = [
-        "MUJER", "AUTOR", "FUEGO", "SUMAR", "RASGO",
-        "GATOS", "GOTAS", "HUEVO", "TINTO", "NAVES",
-        "VERDE", "MELON", "YUYOS", "PIANO", "PISOS", 
-        "VACAS", "MALLA", "MESAS", "CONTA", "COMPU" 
+        "MUJER", "AUTOR", "FUEGO", "SUMAR", "RASGO"
     ];
 
     return ($coleccionPalabras);
@@ -351,42 +338,26 @@ function cargarColeccionPalabras(){
 // array $arrayAux2
 // int $opcion
 // int $numero1
-// int $numero2
+// int $numero3
 // int $partidaGanadora
 // int $indiceAleatorio
 // string $palabra
 // string $nombreJugador1
 // string $nombreJugador2
-// string $nombreJugador3
 // string $nombreJugador4
+// string $nombreJugador5
 // boolean $salir
-// boolean $jugadorExiste1
-// boolean $jugadorValido1
-// boolean $jugadorExiste2
-// boolean $jugadorValido2
-// boolean $verdadero1
-// boolean $todasAdivinadas1
-// boolean $adivinada1
-// booblean $yaAdivinada1
-// booblean $yaAdivinada2
 
-// $partida1
-// $partida2
-// $partida3
-// $partida4
 
 $coleccionPartidas=[]; $coleccionPalb=[]; $arrayAux1=[]; $arrayAux2=[];
-$opcion; $numero1; $indiceAleatorio; $numero3; $partidaGanadora;
-$palabra; $nombreJugador1; $nombreJugador2; $nombreJugador3; $nombreJugador4;
-$salir=true; $jugadorExiste1; $jugadorValido1; $jugadorExiste2; $jugadorValido2; $verdadero1; $todasAdivinadas1; $adivinada1; $yaAdivinada1; $yaAdivinada2;
-$partida1; $partida2; $partida3; $partida4;
-
-$adivinada; $indiceAleatorio;
+$opcion; $numero1; $numero3; $indiceAleatorio; $partidaGanadora;
+$palabra; $nombreJugador1; $nombreJugador2; $nombreJugador4; $nombreJugador5;
+$salir; 
 
 //Inicialización de variables:
 $coleccionPartidas=cargarPartidas();
 $coleccionPalb=cargarColeccionPalabras();
-
+$salir=true; 
 //Proceso:
 do{
     
@@ -404,9 +375,12 @@ do{
         case 2:
             $nombreJugador2=solicitarJugador();
             $indiceAleatorio=palabraAleatoria($nombreJugador2,$coleccionPartidas,$coleccionPalb);
-            if($indiceAleatorio>-1){
+            if($indiceAleatorio!=-1){
                 $arrayAux2=jugarWordix($coleccionPalb[$indiceAleatorio],$nombreJugador2);
                 $coleccionPartidas[]=$arrayAux2;
+            }else{
+                echo"Todas las palabras fueron jugadas por el jugador ".$nombreJugador2.", si quiere jugar nuevamente ingrese una palabra nueva \n";
+                echo"\n";
             }
             break;
         case 3:
@@ -415,9 +389,9 @@ do{
             mostrarPartida($numero3, $coleccionPartidas);
             break;
         case 4:
-            $nombreJugador3 = solicitarJugador();
+            $nombreJugador4 = solicitarJugador();
 
-            $partidaGanadora=primerPartidaGanadora($coleccionPartidas,$nombreJugador3);
+            $partidaGanadora=primerPartidaGanadora($coleccionPartidas,$nombreJugador4);
             if($partidaGanadora!=-1){
                 echo "*******************************************\n";
                 echo"Partida Wordix ".($partidaGanadora+1).": Palabra ".$coleccionPartidas[$partidaGanadora]["palabraWordix"]." \n";
@@ -433,10 +407,10 @@ do{
             break;
         case 5:
             // Solicitar el nombre del jugador usando solicitarJugador
-            $nombreJugador4 = solicitarJugador();
+            $nombreJugador5 = solicitarJugador();
 
             // Obtener el resumen del jugador
-            $resumen = resumenJugador($coleccionPartidas, $nombreJugador4);
+            $resumen = resumenJugador($coleccionPartidas, $nombreJugador5);
 
             // Mostrar el resumen
             if ($resumen["partidas"] > 0) {
@@ -454,7 +428,7 @@ do{
                 }
                 echo "*************************\n";
             } else {
-                echo "El jugador " . $nombreJugador4  . " no tiene partidas registradas.\n";
+                echo "El jugador " . $nombreJugador5  . " no tiene partidas registradas.\n";
             }
             break;
         case 6:
