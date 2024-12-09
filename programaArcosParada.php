@@ -153,10 +153,12 @@ function solicitarJugador() {
  */
 function resumenJugador($array,$nombre){
     // variable interna int[] $intento
+    // variable interna array[] $arrayResumen
+    // variable interna string $nombre
+    // variable interna int $intentoGanado
     // variable interna int $cantVictorias
     // variable interna int $canPuntaje
     // variable interna int $partida
-    // variable interna float $cantPartidas
     // variable interna float $porcentajeVictorias
     $cantPartidas = 0;
     $cantPuntaje = 0;
