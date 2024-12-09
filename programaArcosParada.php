@@ -430,7 +430,7 @@ do{
             $i = 0;
 
             // Recorrer el array de partidas para verificar si el jugador existe
-            while ($i < count($coleccionPartidas) && $jugadorExiste) {
+            while ($i < count($coleccionPartidas) && !$jugadorExiste) {
                 if ($coleccionPartidas[$i]["jugador"] == $nombreJugador5) {
                     $jugadorExiste = true; // El jugador existe
                 }
