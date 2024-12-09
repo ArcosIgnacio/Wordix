@@ -182,7 +182,7 @@ function resumenJugador($array,$nombre){
     }
 
     if ($cantPartidas > 0) {
-        $porcentajeVictorias = ($cantVictorias / $cantPartidas) * 100;
+        $porcentajeVictorias = round(($cantVictorias / $cantPartidas) * 100, 2);
     } else {
         $porcentajeVictorias = 0;
     }
@@ -193,7 +193,7 @@ function resumenJugador($array,$nombre){
         "partidas" => $cantPartidas,
         "puntajeTotal" => $cantPuntaje,
         "victorias" => $cantVictorias,
-        "porcentajeVictorias" => round($porcentajeVictorias, 2),
+        "porcentajeVictorias" => $porcentajeVictorias,
         "adivinadas" => $intento
     ];
 
