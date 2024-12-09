@@ -423,34 +423,6 @@ do{
             }
             break;
         case 5:
-            // // Solicitar el nombre del jugador usando solicitarJugador
-            // $nombreJugador5 = solicitarJugador();
-
-            // // Obtener el resumen del jugador
-            // $resumen = resumenJugador($coleccionPartidas, $nombreJugador5);
-
-            // // Mostrar el resumen
-            // if ($resumen["partidas"] > 0) {
-            //     echo "*************************\n";
-            //     echo "Jugador: " . $resumen["jugador"] . "\n";
-            //     echo "Partidas: " . $resumen["partidas"] . "\n";
-            //     echo "Puntaje Total: " . $resumen["puntajeTotal"] . "\n";
-            //     echo "Victorias: " . $resumen["victorias"] . "\n";
-            //     echo "Porcentaje de Victorias: " . $resumen["porcentajeVictorias"] . "%\n";
-            //     echo "Adivinadas:\n";
-
-                
-            //     for($i=1; $i<=6; $i++) {
-            //         echo"       Intento " . $i . ": " . $resumen["adivinadas"][$i] ."\n";
-            //     }
-            //     echo "*************************\n";
-            // } else {
-            //     echo "El jugador " . $nombreJugador5  . " no tiene partidas registradas.\n";
-            // }
-
-
-
-
             $nombreJugador5 = solicitarJugador();
 
             // Inicializamos la variable de existencia del jugador como falso
