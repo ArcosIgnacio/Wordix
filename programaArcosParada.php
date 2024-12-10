@@ -290,7 +290,6 @@ function agregarPalabra($array,$palabra){
  * @param array $array
  */
 function mostrarPartida($numero,$array){
-    if ($numero >= 0 && $numero < count($array)) {
         echo "\n";
         echo "*******************************************\n";
         echo "Partida WORDIX " . ($numero + 1) . ": palabra " .$array[$numero]["palabraWordix"] . "\n";
@@ -304,7 +303,6 @@ function mostrarPartida($numero,$array){
             echo "Intento: No adivinó la palabra\n";
             echo "*******************************************\n";
         }
-    } 
 }
 
 /**
